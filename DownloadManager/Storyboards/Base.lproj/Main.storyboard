@@ -8,6 +8,14 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Bold.otf">
+            <string>Montserrat-Bold</string>
+        </array>
+        <array key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Launch View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -18,17 +26,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="muS-II-ejD">
-                                <rect key="frame" x="67.5" y="365" width="279" height="104"/>
+                                <rect key="frame" x="63.5" y="365" width="287.5" height="104"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Download Manager" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYD-Yg-Sri">
-                                        <rect key="frame" x="0.0" y="0.0" width="279" height="24"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Download Manager" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYD-Yg-Sri">
+                                        <rect key="frame" x="0.0" y="0.0" width="287.5" height="21"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DsM-Iz-Sau">
-                                        <rect key="frame" x="30" y="74" width="219" height="30"/>
+                                        <rect key="frame" x="30" y="71" width="227.5" height="33"/>
                                         <color key="backgroundColor" name="AccentColor"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                         <state key="normal" title="Start">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -46,13 +55,17 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="muS-II-ejD" secondAttribute="trailing" constant="10" id="2bU-IS-4V2"/>
+                            <constraint firstItem="muS-II-ejD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="EnR-CT-RbY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="muS-II-ejD" secondAttribute="bottom" constant="10" id="P4m-us-mKv"/>
                             <constraint firstItem="muS-II-ejD" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="P8V-4e-zyb"/>
                             <constraint firstItem="muS-II-ejD" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="-36" id="WQt-xe-U7h"/>
+                            <constraint firstItem="muS-II-ejD" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="wj5-Hc-QZs"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="startBtn" destination="DsM-Iz-Sau" id="Lq2-OP-Ly5"/>
-                        <segue destination="dbw-dC-RvR" kind="presentation" identifier="navigateToUsersViewController" id="d08-bO-RAK"/>
+                        <segue destination="dbw-dC-RvR" kind="showDetail" identifier="navigateToUsersViewController" id="d08-bO-RAK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -68,10 +81,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="z4F-Pf-PTA">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="100" width="414" height="762"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserTableViewCell" id="R3I-Nv-Gqg">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserTableViewCell" id="R3I-Nv-Gqg" customClass="UserTableViewCell" customModule="DownloadManager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="R3I-Nv-Gqg" id="0qb-KO-MNA">
@@ -85,23 +98,63 @@
                                     <outlet property="delegate" destination="dbw-dC-RvR" id="L36-Le-tRu"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="YGg-5t-qqU">
+                                <rect key="frame" x="0.0" y="44" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iiy-3l-FOp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="YGg-5t-qqU" firstAttribute="leading" secondItem="iiy-3l-FOp" secondAttribute="leading" id="40r-gU-fUf"/>
+                            <constraint firstItem="iiy-3l-FOp" firstAttribute="trailing" secondItem="YGg-5t-qqU" secondAttribute="trailing" id="Ip0-c0-qPh"/>
                             <constraint firstItem="iiy-3l-FOp" firstAttribute="trailing" secondItem="z4F-Pf-PTA" secondAttribute="trailing" id="d4q-1b-zO1"/>
-                            <constraint firstItem="z4F-Pf-PTA" firstAttribute="top" secondItem="iiy-3l-FOp" secondAttribute="top" id="fbz-tb-Gc3"/>
+                            <constraint firstItem="z4F-Pf-PTA" firstAttribute="top" secondItem="YGg-5t-qqU" secondAttribute="bottom" id="fbz-tb-Gc3"/>
                             <constraint firstItem="iiy-3l-FOp" firstAttribute="bottom" secondItem="z4F-Pf-PTA" secondAttribute="bottom" id="j3R-r3-9g0"/>
+                            <constraint firstItem="YGg-5t-qqU" firstAttribute="top" secondItem="iiy-3l-FOp" secondAttribute="top" id="uty-h4-YQN"/>
                             <constraint firstItem="z4F-Pf-PTA" firstAttribute="leading" secondItem="iiy-3l-FOp" secondAttribute="leading" id="yHi-c1-E84"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="usersSearchBar" destination="YGg-5t-qqU" id="2Dh-ni-9QY"/>
                         <outlet property="usersTableView" destination="z4F-Pf-PTA" id="WGS-gr-Zga"/>
+                        <segue destination="L7z-Zd-jtT" kind="showDetail" identifier="detailedUserView" id="EXk-M3-Uci"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m2m-LB-qxy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="662" y="1"/>
+            <point key="canvasLocation" x="660.86956521739137" y="0.6696428571428571"/>
+        </scene>
+        <!--Detailed User View Controller-->
+        <scene sceneID="Jc7-78-k6K">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="L7z-Zd-jtT" customClass="DetailedUserViewController" customModule="DownloadManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SwR-4l-CSH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7ga-uU-Lta">
+                                <rect key="frame" x="87" y="384" width="240" height="138"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jNW-fp-gY8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jNW-fp-gY8" firstAttribute="trailing" secondItem="7ga-uU-Lta" secondAttribute="trailing" constant="87" id="CAM-OM-DVn"/>
+                            <constraint firstItem="jNW-fp-gY8" firstAttribute="bottom" secondItem="7ga-uU-Lta" secondAttribute="bottom" constant="340" id="NNy-Di-GyX"/>
+                            <constraint firstItem="7ga-uU-Lta" firstAttribute="centerX" secondItem="jNW-fp-gY8" secondAttribute="centerX" id="l6W-lI-PAf"/>
+                            <constraint firstItem="7ga-uU-Lta" firstAttribute="leading" secondItem="jNW-fp-gY8" secondAttribute="leading" constant="87" id="qBH-ea-ahd"/>
+                            <constraint firstItem="7ga-uU-Lta" firstAttribute="centerY" secondItem="jNW-fp-gY8" secondAttribute="centerY" id="vY2-zn-pNf"/>
+                            <constraint firstItem="7ga-uU-Lta" firstAttribute="top" secondItem="jNW-fp-gY8" secondAttribute="top" constant="340" id="xVQ-zQ-bHD"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="selectedUserImgView" destination="7ga-uU-Lta" id="HHC-BK-FuF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bs7-Ng-QoL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1391" y="1"/>
         </scene>
     </scenes>
     <resources>

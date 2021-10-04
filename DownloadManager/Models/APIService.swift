@@ -58,8 +58,7 @@ class APIService{
                 if let data = data {
                     let jsonDecoder = JSONDecoder()
                     do {
-                        let parsedJSON = try jsonDecoder.decode(Response.self, from: data)
-                        print(parsedJSON)
+                        let parsedJSON = try jsonDecoder.decode(Users.self, from: data)
                         SharedModel.ElmUsers = parsedJSON
                         print(parsedJSON.count)
                     } catch {

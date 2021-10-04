@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		111D3013270ACE6900429E2B /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 111D3011270ACE6800429E2B /* Montserrat-Bold.otf */; };
+		111D3014270ACE6900429E2B /* Montserrat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 111D3012270ACE6900429E2B /* Montserrat-Light.otf */; };
+		111D3019270ACF2800429E2B /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 111D3018270ACF2800429E2B /* Montserrat-Regular.otf */; };
+		111D301F270AE3CB00429E2B /* DetailedUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111D301E270AE3CB00429E2B /* DetailedUserViewController.swift */; };
 		11930186270A2CA300040B47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11930185270A2CA300040B47 /* AppDelegate.swift */; };
 		11930188270A2CA300040B47 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11930187270A2CA300040B47 /* SceneDelegate.swift */; };
 		1193018A270A2CA300040B47 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11930189270A2CA300040B47 /* UsersViewController.swift */; };
@@ -23,6 +27,7 @@
 		119301DE270A2DD100040B47 /* UsersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119301DD270A2DD100040B47 /* UsersModel.swift */; };
 		119301E4270A2E5E00040B47 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119301E2270A2E5E00040B47 /* UserTableViewCell.swift */; };
 		119301E5270A2E5E00040B47 /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 119301E3270A2E5E00040B47 /* UserTableViewCell.xib */; };
+		119301F7270A448A00040B47 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119301F6270A448A00040B47 /* UIImage+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +48,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		111D3011270ACE6800429E2B /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
+		111D3012270ACE6900429E2B /* Montserrat-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.otf"; sourceTree = "<group>"; };
+		111D3018270ACF2800429E2B /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
+		111D301E270AE3CB00429E2B /* DetailedUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedUserViewController.swift; sourceTree = "<group>"; };
 		11930182270A2CA300040B47 /* DownloadManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DownloadManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11930185270A2CA300040B47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11930187270A2CA300040B47 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +74,7 @@
 		119301DD270A2DD100040B47 /* UsersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersModel.swift; sourceTree = "<group>"; };
 		119301E2270A2E5E00040B47 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		119301E3270A2E5E00040B47 /* UserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
+		119301F6270A448A00040B47 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +132,7 @@
 				119301BC270A2CC400040B47 /* ViewControllers */,
 				119301C0270A2CDA00040B47 /* ViewModels */,
 				119301C1270A2CF800040B47 /* Storyboards */,
+				119301FB270A5A8D00040B47 /* Fonts */,
 				11930191270A2CA900040B47 /* Assets.xcassets */,
 				11930196270A2CA900040B47 /* Info.plist */,
 				1193018E270A2CA300040B47 /* DownloadManager.xcdatamodeld */,
@@ -162,6 +173,7 @@
 			children = (
 				119301CB270A2D6B00040B47 /* LaunchViewController.swift */,
 				11930189270A2CA300040B47 /* UsersViewController.swift */,
+				111D301E270AE3CB00429E2B /* DetailedUserViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -188,8 +200,19 @@
 			isa = PBXGroup;
 			children = (
 				119301C3270A2D3A00040B47 /* String+Extension.swift */,
+				119301F6270A448A00040B47 /* UIImage+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		119301FB270A5A8D00040B47 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				111D3011270ACE6800429E2B /* Montserrat-Bold.otf */,
+				111D3018270ACF2800429E2B /* Montserrat-Regular.otf */,
+				111D3012270ACE6900429E2B /* Montserrat-Light.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,10 +318,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				111D3013270ACE6900429E2B /* Montserrat-Bold.otf in Resources */,
 				119301E5270A2E5E00040B47 /* UserTableViewCell.xib in Resources */,
 				11930195270A2CA900040B47 /* LaunchScreen.storyboard in Resources */,
 				11930192270A2CA900040B47 /* Assets.xcassets in Resources */,
 				1193018D270A2CA300040B47 /* Main.storyboard in Resources */,
+				111D3019270ACF2800429E2B /* Montserrat-Regular.otf in Resources */,
+				111D3014270ACE6900429E2B /* Montserrat-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +358,8 @@
 				11930188270A2CA300040B47 /* SceneDelegate.swift in Sources */,
 				119301C4270A2D3A00040B47 /* String+Extension.swift in Sources */,
 				11930190270A2CA300040B47 /* DownloadManager.xcdatamodeld in Sources */,
+				119301F7270A448A00040B47 /* UIImage+Extension.swift in Sources */,
+				111D301F270AE3CB00429E2B /* DetailedUserViewController.swift in Sources */,
 				119301DE270A2DD100040B47 /* UsersModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

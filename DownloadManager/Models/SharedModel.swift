@@ -10,6 +10,6 @@ import Foundation
 
 class SharedModel {
     
-    static var ElmUsers = Response()
+    static var ElmUsers = [UserModel]()//Users()
 }
 

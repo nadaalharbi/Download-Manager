@@ -13,7 +13,7 @@ import Foundation
 //   let elmUser = try? newJSONDecoder().decode(ElmUser.self, from: jsonData)
 
 
-typealias Response = [UserModel]
+typealias Users = [UserModel]
 //
 //struct ElmUsers: Codable {
 //    let UserComponent: [UserComponent]
@@ -40,9 +40,8 @@ struct UserModel: Codable {
         case currentUserCollections = "current_user_collections"
         case user, urls, categories, links
     }
-    
-   
-}// end of UserComponent
+}
+
 
 // MARK: - User
 struct User: Codable {
@@ -54,13 +53,14 @@ struct User: Codable {
         case id, username, name, links
         case profileImage = "profile_image"
     }
-}// end of User
+}
 
 
 // MARK: - ProfileImage
 struct ProfileImage: Codable {
     let small, medium, large: String
-}// end of ProfileImage
+}
+
 
 // MARK: - UserLinks
 struct UserLinks: Codable {
@@ -70,7 +70,8 @@ struct UserLinks: Codable {
         case userLinksSelf = "self"
         case html, photos, likes
     }
-}// end of UserLinks
+}
+
 
 // MARK: - Urls
 struct Urls: Codable {
@@ -80,7 +81,8 @@ struct Urls: Codable {
     enum CodingKeys: String, CodingKey {
         case raw, full, regular, small, thumb
     }
-}// end of Urls
+}
+
 
 // MARK: - Category
 struct Category: Codable {
@@ -93,10 +95,12 @@ struct Category: Codable {
         case photoCount = "photo_count"
         case links
     }
-}// end of Category
+}
+
 
 struct UserCollection: Codable {
 }
+
 
 // MARK: - CategoryLinks
 struct CategoryLinks: Codable {
@@ -106,7 +110,8 @@ struct CategoryLinks: Codable {
         case categoryLinks = "self"
         case photos
     }
-}// end of CategoryLinks
+}
+
 
 // MARK: - Links
 struct Links: Codable {
@@ -116,4 +121,4 @@ struct Links: Codable {
         case linksSelf = "self"
         case html, download
     }
-}// end of Links
+}

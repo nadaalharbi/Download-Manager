@@ -13,12 +13,26 @@ class DetailedUserViewController: UIViewController {
     @IBOutlet weak var selectedUserImgView: UIImageView!
     
     // MARK: - Variables
-    var selectedIndexPath: Int?
+    var selectedIndexPath = Int()
+    var currentUserObj = [UserModel]()
 
     // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(self.selectedIndexPath!)
-        selectedUserImgView.image = SharedModel.ElmUsers[self.selectedIndexPath!].user.profileImage.medium.toImage()
+        print("DetailedUserViewController: \(selectedIndexPath)")
+        print("DetailedUserViewController: \(currentUserObj)")
+
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black, NSAttributedString.Key.font: UIFont(name: Constants.Fonts.MontserratRegularFont, size: 16.0)!]
+        navigationItem.title = SharedModel.ElmUsers[selectedIndexPath].user.name//"User Info"
+        
+        
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        let font = UIFont(name: Constants.Fonts.MontserratRegularFont, size: 16.0)
+        backItem.setTitleTextAttributes([NSAttributedString.Key.font: font!], for: .normal)
+        self.navigationItem.backBarButtonItem = backItem
+        
+        selectedUserImgView.image = SharedModel.ElmUsers[selectedIndexPath].user.profileImage.medium.toImage()
     }
-}
+}// end of class

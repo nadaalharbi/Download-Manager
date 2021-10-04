@@ -26,7 +26,6 @@ class UserTableViewCell: UITableViewCell {
     func configure(username: String, url: URL?, session: URLSession) {
         self.usernameLbl.text = username
         
-        // print("Is Main Thread? \(Thread.isMainThread)")
         if let url = url {
             // start animating
             self.activityIndicatorView.startAnimating()

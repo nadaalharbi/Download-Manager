@@ -11,6 +11,9 @@
 		111D3014270ACE6900429E2B /* Montserrat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 111D3012270ACE6900429E2B /* Montserrat-Light.otf */; };
 		111D3019270ACF2800429E2B /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 111D3018270ACF2800429E2B /* Montserrat-Regular.otf */; };
 		111D301F270AE3CB00429E2B /* DetailedUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111D301E270AE3CB00429E2B /* DetailedUserViewController.swift */; };
+		1153D9AE270B787F004E5B53 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1153D9AD270B787F004E5B53 /* UIViewController+Extension.swift */; };
+		1153D9B4270B78F2004E5B53 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1153D9B3270B78F2004E5B53 /* Constants.swift */; };
+		1153D9BC270B7D89004E5B53 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1153D9BB270B7D89004E5B53 /* Bundle+Extensions.swift */; };
 		11930186270A2CA300040B47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11930185270A2CA300040B47 /* AppDelegate.swift */; };
 		11930188270A2CA300040B47 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11930187270A2CA300040B47 /* SceneDelegate.swift */; };
 		1193018A270A2CA300040B47 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11930189270A2CA300040B47 /* UsersViewController.swift */; };
@@ -52,6 +55,9 @@
 		111D3012270ACE6900429E2B /* Montserrat-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.otf"; sourceTree = "<group>"; };
 		111D3018270ACF2800429E2B /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
 		111D301E270AE3CB00429E2B /* DetailedUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedUserViewController.swift; sourceTree = "<group>"; };
+		1153D9AD270B787F004E5B53 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		1153D9B3270B78F2004E5B53 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1153D9BB270B7D89004E5B53 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		11930182270A2CA300040B47 /* DownloadManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DownloadManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11930185270A2CA300040B47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11930187270A2CA300040B47 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +108,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1153D9B2270B78D4004E5B53 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				1153D9B3270B78F2004E5B53 /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		11930179270A2CA300040B47 = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +141,7 @@
 			children = (
 				11930185270A2CA300040B47 /* AppDelegate.swift */,
 				11930187270A2CA300040B47 /* SceneDelegate.swift */,
+				1153D9B2270B78D4004E5B53 /* Utilities */,
 				119301C2270A2D2400040B47 /* Extensions */,
 				119301B8270A2CBC00040B47 /* Models */,
 				119301BC270A2CC400040B47 /* ViewControllers */,
@@ -201,6 +216,8 @@
 			children = (
 				119301C3270A2D3A00040B47 /* String+Extension.swift */,
 				119301F6270A448A00040B47 /* UIImage+Extension.swift */,
+				1153D9AD270B787F004E5B53 /* UIViewController+Extension.swift */,
+				1153D9BB270B7D89004E5B53 /* Bundle+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -350,15 +367,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				1193018A270A2CA300040B47 /* UsersViewController.swift in Sources */,
+				1153D9AE270B787F004E5B53 /* UIViewController+Extension.swift in Sources */,
 				119301D4270A2D9000040B47 /* APIService.swift in Sources */,
 				119301CC270A2D6B00040B47 /* LaunchViewController.swift in Sources */,
 				11930186270A2CA300040B47 /* AppDelegate.swift in Sources */,
 				119301E4270A2E5E00040B47 /* UserTableViewCell.swift in Sources */,
+				1153D9BC270B7D89004E5B53 /* Bundle+Extensions.swift in Sources */,
 				119301D9270A2DB200040B47 /* SharedModel.swift in Sources */,
 				11930188270A2CA300040B47 /* SceneDelegate.swift in Sources */,
 				119301C4270A2D3A00040B47 /* String+Extension.swift in Sources */,
 				11930190270A2CA300040B47 /* DownloadManager.xcdatamodeld in Sources */,
 				119301F7270A448A00040B47 /* UIImage+Extension.swift in Sources */,
+				1153D9B4270B78F2004E5B53 /* Constants.swift in Sources */,
 				111D301F270AE3CB00429E2B /* DetailedUserViewController.swift in Sources */,
 				119301DE270A2DD100040B47 /* UsersModel.swift in Sources */,
 			);

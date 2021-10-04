@@ -11,18 +11,22 @@ class LaunchViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var startBtn: UIButton!
-
+    @IBOutlet weak var versionNumber: UILabel!
+    
     // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         startBtn.layer.cornerRadius = 15
         startBtn.layer.masksToBounds = true
-        APIService.getUsersData()
+        
+        versionNumber.font = UIFont(name: Constants.Fonts.MontserratLightFont, size: 14.0)
+        versionNumber.textColor = .darkGray
+        versionNumber.text = Bundle.main.versionString
     }
     
     @IBAction func startButtonAction(_ sender: UIButton) {
         // Call service
-        performSegue(withIdentifier: "navigateToUsersViewController", sender: self)
+        APIService.getUsersData()
+        performSegue(withIdentifier: "navigateToUsersVC", sender: self)
     }
-    
 }

@@ -16,7 +16,7 @@ class LaunchViewController: UIViewController {
     // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        startBtn.layer.cornerRadius = 15
+        startBtn.layer.cornerRadius = 15.0
         startBtn.layer.masksToBounds = true
         
         versionNumber.font = UIFont(name: Constants.Fonts.MontserratLightFont, size: 14.0)
@@ -26,7 +26,12 @@ class LaunchViewController: UIViewController {
     
     @IBAction func startButtonAction(_ sender: UIButton) {
         // Call service
-        APIService.getUsersData()
-        performSegue(withIdentifier: "navigateToUsersVC", sender: self)
+        sender.isEnabled = false
+        sender.isUserInteractionEnabled = false
+        
+        DispatchQueue.main.async {
+            APIService.getUsersData()
+            self.performSegue(withIdentifier: "navigateToUsersVC", sender: self)
+        }
     }
 }

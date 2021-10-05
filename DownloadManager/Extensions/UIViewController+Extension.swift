@@ -44,4 +44,12 @@ extension UIViewController {
         alert.addAction(okAction)
         self.present(alert, animated:true,completion:nil)
     }
+    
+    func setSegmentFont(segment: UISegmentedControl){
+        let font = UIFont(name: Constants.Fonts.MontserratRegularFont, size: 14.0)
+        segment.setTitleTextAttributes([NSAttributedString.Key.font: font!], for: .normal)
+        
+        segment.layer.cornerRadius = 70.0
+        segment.layer.masksToBounds = true
+    }
 }// end of extension

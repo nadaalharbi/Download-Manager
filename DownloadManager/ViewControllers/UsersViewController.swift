@@ -12,13 +12,12 @@ class UsersViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var usersSearchBar: UISearchBar!
     @IBOutlet weak var usersTableView: UITableView!
-    @IBOutlet weak var navigationBar: UINavigationBar!
     
     // MARK: - Variables
     var filteredUsers = [UserModel]()
     var currentUserObj = [UserModel]()
     
-    var selectedIndexPath = 0
+    var selectedIndexPath: Int = 0
     var isSearchActive: Bool = false
 
     var refreshControl = UIRefreshControl()
@@ -36,20 +35,31 @@ class UsersViewController: UIViewController {
     // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /// Set Navigation Bar
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black, NSAttributedString.Key.font: UIFont(name: Constants.Fonts.MontserratRegularFont, size: 16.0)!]
-//        navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
-        navigationItem.title = "Download Manager"
+        self.title = "Download Manager"
+        
+        /// Set Back Button
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        let font = UIFont(name: Constants.Fonts.MontserratRegularFont, size: 16.0)
+        backItem.setTitleTextAttributes([
+            NSAttributedString.Key.font: font!], for: .normal)
+        self.navigationItem.backBarButtonItem = backItem
+        
+        /// Set Table View
         usersTableView.delegate = self
         usersTableView.dataSource = self
         
         usersTableView.backgroundColor = .clear
         
-        // Set Refresh Control
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to Refresh Users")
+        /// Set Refresh Control
+        refreshControl.attributedTitle = NSAttributedString(string: "Refresh Users...")
         refreshControl.addTarget(self, action: #selector(self.refreshUsers(_:)), for: .valueChanged)
            usersTableView.addSubview(refreshControl)
         
-        // Set Search Bar
+        /// Set Search Bar
         self.setupSearchBar()
     }
     
@@ -61,6 +71,7 @@ class UsersViewController: UIViewController {
         usersSearchBar?.text = ""
     }
     
+    // MARK: - Selector Functions
     @objc func refreshUsers(_ sender: AnyObject) {
         DispatchQueue.main.async {
             APIService.getUsersData()
@@ -79,7 +90,7 @@ class UsersViewController: UIViewController {
     }
     
     @IBAction func logoutAction(_ sender: Any) {
-        self.displayAlertMessage(userTitle: "Warning", userMessage: "Are you sure you want to logout?", displayCancelAction: true) { (alert, action) in
+        self.displayAlertMessage(userTitle: "Logout", userMessage: "Are you sure you want to logout?", displayCancelAction: true) { (alert, action) in
             if action == .OK {
                 
                 let rootVC : UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LaunchViewController") as! LaunchViewController
@@ -92,14 +103,12 @@ class UsersViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let backItem = UIBarButtonItem()
-           backItem.title = "Back"
-           navigationItem.backBarButtonItem = backItem
         
         if segue.identifier == "detailedUserVC" {
             if let vc = segue.destination as? DetailedUserViewController {
-                vc.selectedIndexPath = selectedIndexPath
+                vc.selectedIndexPath = 9//selectedIndexPat
                 vc.currentUserObj = currentUserObj
+                
             }
         }
     }
@@ -144,8 +153,16 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource{
         print("Selected cell is: \(users[indexPath.row])")
         self.selectedIndexPath = indexPath.row
         self.currentUserObj = users
-    
-        performSegue(withIdentifier: "detailedUserVC", sender: self)
+        
+        guard let detailedUserVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailedUserViewController") as? DetailedUserViewController else{
+           return
+        }
+        
+        detailedUserVC.selectedIndexPath = indexPath.row
+        detailedUserVC.currentUserObj = users
+        
+        navigationController?.pushViewController(detailedUserVC, animated: true)
+        //performSegue(withIdentifier: "detailedUserVC", sender: self)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

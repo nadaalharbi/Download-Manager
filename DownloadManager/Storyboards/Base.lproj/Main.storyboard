@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -108,9 +109,13 @@
                                     <outlet property="delegate" destination="dbw-dC-RvR" id="L36-Le-tRu"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="YGg-5t-qqU">
+                            <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YGg-5t-qqU">
                                 <rect key="frame" x="0.0" y="56" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
                             </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iiy-3l-FOp"/>
@@ -154,7 +159,7 @@
                                 <rect key="frame" x="15" y="103" width="384" height="744"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="L38-x7-PtI">
-                                        <rect key="frame" x="69.5" y="0.0" width="245" height="33"/>
+                                        <rect key="frame" x="10" y="0.0" width="364" height="33"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View as: " textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8d4-X4-s2b">
                                                 <rect key="frame" x="0.0" y="0.0" width="63" height="33"/>
@@ -166,9 +171,8 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Jw5-wh-pTA">
-                                                <rect key="frame" x="71" y="0.0" width="174" height="34"/>
+                                                <rect key="frame" x="71" y="0.0" width="293" height="34"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="174" id="V9O-Ym-wtE"/>
                                                     <constraint firstAttribute="height" constant="33" id="uMj-g5-06q"/>
                                                 </constraints>
                                                 <segments>
@@ -182,16 +186,28 @@
                                             </segmentedControl>
                                         </subviews>
                                     </stackView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7ga-uU-Lta">
-                                        <rect key="frame" x="0.0" y="63" width="384" height="606"/>
-                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1hQ-6H-oG3">
+                                        <rect key="frame" x="28" y="63" width="328" height="606"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7ga-uU-Lta">
+                                                <rect key="frame" x="8" y="8" width="315" height="590"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="7ga-uU-Lta" firstAttribute="leading" secondItem="1hQ-6H-oG3" secondAttribute="leading" constant="8" id="D7r-OU-5na"/>
+                                            <constraint firstItem="7ga-uU-Lta" firstAttribute="top" secondItem="1hQ-6H-oG3" secondAttribute="top" constant="8" id="Ezx-Lb-xP5"/>
+                                            <constraint firstAttribute="bottom" secondItem="7ga-uU-Lta" secondAttribute="bottom" constant="8" id="krH-L1-wMq"/>
+                                            <constraint firstAttribute="trailing" secondItem="7ga-uU-Lta" secondAttribute="trailing" constant="5" id="wSS-zC-ebY"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PG2-Fm-1La">
                                         <rect key="frame" x="30" y="699" width="324" height="45"/>
                                         <color key="backgroundColor" systemColor="labelColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="aZU-Jm-7T6"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                         <state key="normal" title="Download">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -201,13 +217,12 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="downloadAction:" destination="L7z-Zd-jtT" eventType="touchUpInside" id="Gpp-0i-qcb"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="PG2-Fm-1La" secondAttribute="trailing" constant="30" id="1iR-2y-w08"/>
+                                    <constraint firstAttribute="trailing" secondItem="L38-x7-PtI" secondAttribute="trailing" constant="10" id="PES-nw-V6T"/>
+                                    <constraint firstItem="L38-x7-PtI" firstAttribute="leading" secondItem="oKe-1f-4EY" secondAttribute="leading" constant="10" id="YbU-Az-aBe"/>
                                     <constraint firstItem="PG2-Fm-1La" firstAttribute="leading" secondItem="oKe-1f-4EY" secondAttribute="leading" constant="30" id="rJ1-Ms-Hfl"/>
                                 </constraints>
                             </stackView>
@@ -225,6 +240,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="K3B-7K-7J4"/>
                     <connections>
+                        <outlet property="backgroundViewOfImage" destination="1hQ-6H-oG3" id="32I-mt-clD"/>
                         <outlet property="downloadBtn" destination="PG2-Fm-1La" id="Stg-Fg-Tjb"/>
                         <outlet property="imageSizeSegmentControl" destination="Jw5-wh-pTA" id="hCG-Cu-thJ"/>
                         <outlet property="selectedUserImgView" destination="7ga-uU-Lta" id="HHC-BK-FuF"/>

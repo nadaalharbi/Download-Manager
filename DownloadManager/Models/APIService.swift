@@ -9,14 +9,9 @@ import Foundation
 import Network
 import UIKit
 
-class APIService{
+class APIService {
     
-    enum EndPoints {
-        static let urlString = "https://pastebin.com/raw/wgkJgazE"
-        var url: URL {
-            return URL(string: APIService.EndPoints.urlString)!
-        }
-    }
+    static let urlString = "https://pastebin.com/raw/wgkJgazE"
     
     class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void){
         var request = URLRequest(url: url)
@@ -43,29 +38,26 @@ class APIService{
         task.resume()
     }
     
-    class func getUsersData() {
-        //        taskForPOSTRequest(url: URL(string: "https://pastebin.com/raw/wgkJgazE")!, responseType: User.self, body: "") { (response, error) in
-        //            if response != nil {
-        //                // core data
-        //                if response != nil {
-        //                    print(response!)
-        //                }
-        //            }
-        //        }
-        
-        if let url = URL(string: "https://pastebin.com/raw/wgkJgazE") {
-            URLSession.shared.dataTask(with: url) { data, response, error in
+    class func getUsersData(completion: @escaping (Users?, Error?) -> Void) {
+        if let url = URL(string: urlString) {
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 if let data = data {
                     let jsonDecoder = JSONDecoder()
                     do {
                         let parsedJSON = try jsonDecoder.decode(Users.self, from: data)
                         SharedModel.ElmUsers = parsedJSON
+                        DispatchQueue.main.async {
+                            completion(parsedJSON, nil)
+                        }
                     } catch {
                         print(error.localizedDescription)
+                        DispatchQueue.main.async {
+                            completion(nil, error)
+                        }
                     }
                 }
-            }.resume()
+            }
+            task.resume()
         }
     }
-    
 }

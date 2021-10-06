@@ -1,5 +1,5 @@
 //
-//  Bundle+Extensions.swift
+//  Bundle+Extension.swift
 //  DownloadManager
 //
 //  Created by sy on 10/4/21.
@@ -22,12 +22,14 @@ extension Bundle {
     }
     
     var versionString: String {
-        var strType = ""
+        var strType: String = ""
 
         // If you use different bundle IDs for different environments, code like this is helpful:
         if bundleID.contains(".idms") {
+            print(strType)
             strType = "Release"
         }
+        
         let returnValue = "Version: \(releaseVersionNumber) (Build \(buildVersionNumber))"
         
         return returnValue.trimmingCharacters(in: .whitespacesAndNewlines)

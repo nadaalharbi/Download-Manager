@@ -12,7 +12,23 @@ import UIKit
 extension String {
     
     func toImage() -> UIImage? {
-        return UIImage(data: try! Data(contentsOf: URL(string: self)!))
+        if Reachability.isConnectedToNetwork() {
+            do{
+                let data = try Data(contentsOf: URL(string: self)!)
+                return UIImage(data: data)
+            } catch {
+                print( error.localizedDescription)
+                return nil
+            }
+        } else {
+            print("Not connected")
+            return nil
+        }
+//        if Reachability.isConnectedToNetwork() {
+//            return UIImage(data: try! Data(contentsOf: URL(string: self)!))
+//        } else {
+//            return nil
+//        }
     }
     
     // convert hex string color to UIColor
@@ -39,12 +55,12 @@ extension String {
     }
     
     
-    func toDate(dateFormat: String) -> Date? {
-        
+    func toDate() -> Date? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = dateFormat
+        dateFormatter.locale = Locale(identifier: "en")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let date = dateFormatter.date(from: self)!
         
-        let date: Date? = dateFormatter.date(from: self)
         return date
     }
 }// end of extension

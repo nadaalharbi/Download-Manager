@@ -89,15 +89,6 @@ class UsersViewController: UIViewController {
         self.usersViewModel.getUsersData() { data, error in
             self.usersTableView.reloadData()
         }
-        
-//        APIService.getUsersData(){ data, error in
-//            if data != nil {
-//                self.usersTableView.reloadData()
-//                self.refreshControl.endRefreshing()
-//            }else{
-//                print(error?.localizedDescription ?? "error")
-//            }
-//        }
     }
     
     fileprivate func setupSearchBar() {
@@ -139,7 +130,7 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell: UserTableViewCell = Bundle.main.loadNibNamed("UserTableViewCell", owner: self, options: nil)?.first as? UserTableViewCell else {
-            fatalError("Error: Undable to load User Table View Cell.")
+            fatalError("Error: Unaable to load User Table View Cell.")
         }
         
         cell.accessoryType = .disclosureIndicator

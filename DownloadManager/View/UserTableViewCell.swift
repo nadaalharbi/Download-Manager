@@ -57,6 +57,11 @@ class UserTableViewCell: UITableViewCell, ImageRepositoryProtocol {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        if let image = userImgView {
+            image.layer.cornerRadius = 10.0
+            image.layer.masksToBounds = true
+            image.contentMode = .scaleAspectFit
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

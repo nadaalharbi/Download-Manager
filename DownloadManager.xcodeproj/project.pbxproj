@@ -12,7 +12,7 @@
 		111D3019270ACF2800429E2B /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 111D3018270ACF2800429E2B /* Montserrat-Regular.otf */; };
 		111D301F270AE3CB00429E2B /* DetailedUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111D301E270AE3CB00429E2B /* DetailedUserViewController.swift */; };
 		114C11D4270E59AC0028BDC1 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C11D3270E59AC0028BDC1 /* CircularImageView.swift */; };
-		11508150270DAF5B00F32B97 /* FetchingUsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1150814F270DAF5B00F32B97 /* FetchingUsersTests.swift */; };
+		11508150270DAF5B00F32B97 /* LaunchVCUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1150814F270DAF5B00F32B97 /* LaunchVCUnitTests.swift */; };
 		1150815E270DBF7C00F32B97 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1150815D270DBF7C00F32B97 /* Reachability.swift */; };
 		11508163270DCB1600F32B97 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11508162270DCB1600F32B97 /* Protocols.swift */; };
 		1153D9AE270B787F004E5B53 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1153D9AD270B787F004E5B53 /* UIViewController+Extension.swift */; };
@@ -37,6 +37,8 @@
 		119301E5270A2E5E00040B47 /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 119301E3270A2E5E00040B47 /* UserTableViewCell.xib */; };
 		119301F7270A448A00040B47 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119301F6270A448A00040B47 /* UIImage+Extension.swift */; };
 		11C54BC2270E358000661E27 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C54BC1270E358000661E27 /* UIView+Extension.swift */; };
+		11C78E39270FB05E009D5EDC /* UsersVCUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C78E38270FB05E009D5EDC /* UsersVCUnitTests.swift */; };
+		11C78E3E270FB996009D5EDC /* DetailedUserVCUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C78E3D270FB996009D5EDC /* DetailedUserVCUnitTests.swift */; };
 		8C31FB7DD0D8F2FABBA1DABA /* Pods_DownloadManagerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F088E45C68FD86046024383 /* Pods_DownloadManagerTests.framework */; };
 		9E6BED9B2EB42044D175ACEC /* Pods_DownloadManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6F487FBB377FEEFC8255C65 /* Pods_DownloadManager.framework */; };
 		FB4EC2A5BDC027B52904E82B /* Pods_DownloadManager_DownloadManagerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E212AB77DF176AD3C256C9BE /* Pods_DownloadManager_DownloadManagerUITests.framework */; };
@@ -66,7 +68,7 @@
 		111D3018270ACF2800429E2B /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
 		111D301E270AE3CB00429E2B /* DetailedUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedUserViewController.swift; sourceTree = "<group>"; };
 		114C11D3270E59AC0028BDC1 /* CircularImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularImageView.swift; sourceTree = "<group>"; };
-		1150814F270DAF5B00F32B97 /* FetchingUsersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingUsersTests.swift; sourceTree = "<group>"; };
+		1150814F270DAF5B00F32B97 /* LaunchVCUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchVCUnitTests.swift; sourceTree = "<group>"; };
 		1150815D270DBF7C00F32B97 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		11508162270DCB1600F32B97 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		1153D9AD270B787F004E5B53 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -97,6 +99,8 @@
 		119301E3270A2E5E00040B47 /* UserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
 		119301F6270A448A00040B47 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		11C54BC1270E358000661E27 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		11C78E38270FB05E009D5EDC /* UsersVCUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersVCUnitTests.swift; sourceTree = "<group>"; };
+		11C78E3D270FB996009D5EDC /* DetailedUserVCUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedUserVCUnitTests.swift; sourceTree = "<group>"; };
 		6F088E45C68FD86046024383 /* Pods_DownloadManagerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DownloadManagerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		971901642CF7942815281168 /* Pods-DownloadManager-DownloadManagerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DownloadManager-DownloadManagerUITests.debug.xcconfig"; path = "Target Support Files/Pods-DownloadManager-DownloadManagerUITests/Pods-DownloadManager-DownloadManagerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		97287EDB7882E503DE48DB18 /* Pods-DownloadManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DownloadManager.release.xcconfig"; path = "Target Support Files/Pods-DownloadManager/Pods-DownloadManager.release.xcconfig"; sourceTree = "<group>"; };
@@ -202,7 +206,9 @@
 			children = (
 				1193019F270A2CA900040B47 /* DownloadManagerTests.swift */,
 				119301A1270A2CA900040B47 /* Info.plist */,
-				1150814F270DAF5B00F32B97 /* FetchingUsersTests.swift */,
+				1150814F270DAF5B00F32B97 /* LaunchVCUnitTests.swift */,
+				11C78E38270FB05E009D5EDC /* UsersVCUnitTests.swift */,
+				11C78E3D270FB996009D5EDC /* DetailedUserVCUnitTests.swift */,
 			);
 			path = DownloadManagerTests;
 			sourceTree = "<group>";
@@ -575,8 +581,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11508150270DAF5B00F32B97 /* FetchingUsersTests.swift in Sources */,
+				11C78E39270FB05E009D5EDC /* UsersVCUnitTests.swift in Sources */,
+				11508150270DAF5B00F32B97 /* LaunchVCUnitTests.swift in Sources */,
 				119301A0270A2CA900040B47 /* DownloadManagerTests.swift in Sources */,
+				11C78E3E270FB996009D5EDC /* DetailedUserVCUnitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

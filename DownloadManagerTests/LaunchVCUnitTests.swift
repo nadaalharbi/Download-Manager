@@ -1,44 +1,39 @@
 //
-//  FetchingUsersTests.swift
+//  LaunchVCUnitTests.swift
 //  DownloadManagerTests
 //
 //  Created by sy on 10/6/21.
 //
 
 import XCTest
+import UIKit
 @testable import DownloadManager
 
-class FetchingUsersTests: XCTestCase {
+class LaunchVCUnitTests: XCTestCase {
 
 //    var session: URLSession!
+    var launch: LaunchViewController!
     
     override func setUp() {
         super.setUp()
-
-    }
-    
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-       // session = URLSession(configuration: .default)
-    }
-    
-    override func tearDownWithError() throws {
-        //session = nil
+        continueAfterFailure = false
+        launch = LaunchViewController()
     }
     
     override func tearDown() {
         super.tearDown()
     }
     
+//    func testFetchUsersWithNoNetwork() {
+//        let result = Reachability.isConnectedToNetwork()
+//        XCTAssertFalse(result, "Unable to create reachability")
+//    }
     
-    
-    
-    
-    
-    
-    
-    
-    
+    func testFetchUsersWithNetwork() {
+        let result = Reachability.isConnectedToNetwork()
+        XCTAssertTrue(result)
+    }
+
     
     
 //    func getUsersDataa() {

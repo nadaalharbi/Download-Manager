@@ -179,16 +179,6 @@ class DetailedUserViewController: UIViewController {
         }
     }
     
-//
-//    @IBAction func downloadAction(_ sender: Any) {
-//        let imageString = String(selectedImageStringURL)
-//
-//        if let url = URL(string: imageString),
-//           let data = try? Data(contentsOf: url),
-//           let image = UIImage(data: data) {
-//            UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(image:didFinishSavingWithError:contextInfo:)), nil)
-//        }
-//    }
     
     // MARK: - Selector Functions Objective-C
     @objc func openLink(){

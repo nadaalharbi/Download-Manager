@@ -9,21 +9,20 @@ import UIKit
 import PromiseKit
 
 class UserTableViewCell: UITableViewCell, ImageRepositoryProtocol {
-    let cache = URLCache.shared
-    
     
     // MARK: - Outlets
     @IBOutlet weak var usernameLbl: UILabel!
     @IBOutlet weak var userImgView: UIImageView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
-    
     // MARK: - Variables
     static var reusableIdetifier: String{
         return String(describing: self)
     }
     
+    let cache = URLCache.shared
     private var dataTask: URLSessionDataTask?
+    // Todo remove
     var user : UserModel? {
         didSet {
             usernameLbl.text = user?.user.name

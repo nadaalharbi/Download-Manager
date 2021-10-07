@@ -14,7 +14,7 @@ class LaunchViewController: UIViewController {
     @IBOutlet weak var versionNumber: UILabel!
     
     @IBOutlet weak var welcomeView: UIView!
-
+    
     // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,14 +29,6 @@ class LaunchViewController: UIViewController {
     func fetchingUsers(){
         if Reachability.isConnectedToNetwork() {
             self.performSegue(withIdentifier: "navigateToUsersVC", sender: self)
-//
-//            APIService.getUsersData() { data, error in
-//                if data != nil {
-//                    self.performSegue(withIdentifier: "navigateToUsersVC", sender: self)
-//                }else{
-//                    print(error?.localizedDescription ?? "Error")
-//                }
-//            }
         } else {
             self.displayAlertMessage(userTitle: Constants.AlertMessages.ConnectionError.stringValue, userMessage: Constants.AlertMessages.NoInternetConnection.stringValue)
             return
@@ -44,10 +36,11 @@ class LaunchViewController: UIViewController {
     }
     
     @IBAction func startButtonAction(_ sender: UIButton) {
-        // Call service
+        // Disable clicking of the button once clicked
         sender.isEnabled = false
         sender.isUserInteractionEnabled = false
         
-        fetchingUsers()
+        // Call service
+        self.fetchingUsers()
     }
 }

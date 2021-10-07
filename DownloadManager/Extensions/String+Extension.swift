@@ -17,21 +17,16 @@ extension String {
                 let data = try Data(contentsOf: URL(string: self)!)
                 return UIImage(data: data)
             } catch {
-                print( error.localizedDescription)
+                print(error.localizedDescription)
                 return nil
             }
         } else {
-            print("Not connected")
+            print(Constants.AlertMessages.NoInternetConnection)
             return nil
         }
-//        if Reachability.isConnectedToNetwork() {
-//            return UIImage(data: try! Data(contentsOf: URL(string: self)!))
-//        } else {
-//            return nil
-//        }
     }
     
-    // convert hex string color to UIColor
+    // Convert hex string color to UIColor Example "#060607" to UIColor
     public var toUIColor: UIColor {
         var cString:String = self.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
@@ -54,18 +49,14 @@ extension String {
         )
     }
     
-    
+    // Convert to string date format
     func toDateFormat() -> String? {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.locale = Locale(identifier: "en")
-//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-//        let date = dateFormatter.date(from: self)!
-    // Take the string and convert it to date base on givn orgin format
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-    let date = dateFormatter.date(from: self)
-    // then, convert it to string with the format you need
-    dateFormatter.dateFormat = "dd-MM-yyy"
-    return dateFormatter.string(from: date!)
+        // Take the string and convert it to date base on givn orgin format
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let date = dateFormatter.date(from: self)
+        // then, convert it to string with the format you need
+        dateFormatter.dateFormat = "dd-MM-yyy"
+        return dateFormatter.string(from: date!)
     }
 }// end of extension

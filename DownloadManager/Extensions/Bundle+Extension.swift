@@ -23,8 +23,7 @@ extension Bundle {
     
     var versionString: String {
         var strType: String = ""
-
-        // If you use different bundle IDs for different environments, code like this is helpful:
+        
         if bundleID.contains(".idms") {
             print(strType)
             strType = "Release"

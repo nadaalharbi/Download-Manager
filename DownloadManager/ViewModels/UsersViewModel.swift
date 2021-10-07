@@ -10,24 +10,16 @@ import Foundation
 
 class UsersViewModel: NSObject {
     
+    //MARK: - Variables
     private var apiService: APIService!
-   // private(set)
-    // 1
-    var usersData = [UserModel]() //{
-//            didSet {
-//                self.bindUsersViewModelToController()
-//            }
-//        }
-//
-//    var bindUsersViewModelToController : (() -> ()) = {}
+    var usersData = [UserModel]()
     
     override init() {
         super.init()
         apiService = APIService()
-        //self.getUsersData(completion: <#Result<Users, Error>#>)
     }
     
-    //2.
+    // MARK: - Functions
     func getUsersData(completion: @escaping (Users?, Error?) -> Void) {
         self.apiService.getUsersData { (data, error) in
             if let data = data {

@@ -9,7 +9,6 @@ import UIKit
 
 extension UIViewController {
     
-    // MARK: - Alert Message
     func displayAlertMessage(userTitle: String = "Warning", userMessage: String, textFieldPlaceHolder: String? = nil, displayCancelAction: Bool = false, completion: ((UIAlertController , Constants.AlertActionTypes?) -> Void)? = nil){
         
         let alert = UIAlertController(title:userTitle , message:userMessage, preferredStyle: UIAlertController.Style.alert)

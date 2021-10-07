@@ -17,7 +17,6 @@ class UsersViewController: UIViewController {
     var filteredUsers = [UserModel]()
     var currentUserObj = [UserModel]()
     
-    // Todo test
     // 3
     var userModelObj = [UserModel]()
     // 4
@@ -74,15 +73,7 @@ class UsersViewController: UIViewController {
         self.usersViewModel.getUsersData() { data, error in
             self.usersTableView.reloadData()
         }
-        //self.usersViewModel.bindUsersViewModelToController =  {
-//            DispatchQueue.main.async {
-//                //self.usersTableView.dataSource = self.dataSource
-//                self.usersTableView.reloadData()
-//            }
-            //self.updateDataSource()
-        //}
     }
-    
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
@@ -92,22 +83,13 @@ class UsersViewController: UIViewController {
         usersSearchBar?.text = ""
     }
     
-    
-    func updateDataSource(){
-        //self.dataSource = UsersTableViewDataSource(identifier: "UserTableViewCell", users: self.usersViewModel.usersData, configureUserCell: { (cell, data) in
-            //cell.usernameLbl.text = data.user.name
-            //cell.userImgView.image = data.user.profileImage.small.toImage()
-            //})
-
-            DispatchQueue.main.async {
-                self.usersTableView.dataSource = self.dataSource// as! UITableViewDataSource
-                self.usersTableView.reloadData()
-            }
-    }
-    
-    
-    // MARK: - Selector Functions
+    // MARK: - Selector Functions (Objcetive-C)
     @objc func refreshUsers(_ sender: AnyObject) {
+        
+        self.usersViewModel.getUsersData() { data, error in
+            self.usersTableView.reloadData()
+        }
+        
 //        APIService.getUsersData(){ data, error in
 //            if data != nil {
 //                self.usersTableView.reloadData()
@@ -137,17 +119,6 @@ class UsersViewController: UIViewController {
                     return
                 }
                 sceneDelegate.window?.rootViewController = rootVC
-            }
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "detailedUserVC" {
-            if let vc = segue.destination as? DetailedUserViewController {
-                vc.selectedIndexPath = 9//selectedIndexPat
-                vc.currentUserObj = currentUserObj
-                
             }
         }
     }

@@ -148,6 +148,7 @@
 		1156C4C4270EF3B900187E78 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				119301BC270A2CC400040B47 /* ViewControllers */,
 				119301E2270A2E5E00040B47 /* UserTableViewCell.swift */,
 				119301E3270A2E5E00040B47 /* UserTableViewCell.xib */,
 			);
@@ -184,7 +185,6 @@
 				1153D9B2270B78D4004E5B53 /* Utilities */,
 				119301C2270A2D2400040B47 /* Extensions */,
 				11C78E2E270F4571009D5EDC /* WebService */,
-				119301BC270A2CC400040B47 /* ViewControllers */,
 				119301B8270A2CBC00040B47 /* Models */,
 				1156C4C4270EF3B900187E78 /* View */,
 				119301C0270A2CDA00040B47 /* ViewModels */,

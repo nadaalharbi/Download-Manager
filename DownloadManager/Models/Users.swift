@@ -9,26 +9,18 @@ import Foundation
 
 
 typealias Users = [UserModel]
-//struct Users: Codable {
-//    let userData: [UserModel]
-//}
-//
-//struct ElmUsers: Codable {
-//    let UserComponent: [UserComponent]
-//}
 
 // MARK: - UserModel
 struct UserModel: Codable {
     let id, color: String
     let width, height, likes: Int
     let likedByUser: Bool
-    let createdAt: String// Date
+    let createdAt: String
     let user: User
     let currentUserCollections: [UserCollection]
     let urls: Urls
     let categories: [Category]
     let links: Links
-    
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -74,20 +66,15 @@ struct UserLinks: Codable {
 // MARK: - Urls
 struct Urls: Codable {
     let raw, full, regular, small, thumb: String
-
-    // Todo remove it no need
-    enum CodingKeys: String, CodingKey {
-        case raw, full, regular, small, thumb
-    }
 }
 
 
 // MARK: - Category
 struct Category: Codable {
     let id, photoCount: Int
-    let title: String//Title
+    let title: String
     let links: CategoryLinks
-
+    
     enum CodingKeys: String, CodingKey {
         case id, title
         case photoCount = "photo_count"
@@ -96,6 +83,7 @@ struct Category: Codable {
 }
 
 
+// MARK: - UserCollection
 struct UserCollection: Codable {
 }
 
@@ -103,7 +91,7 @@ struct UserCollection: Codable {
 // MARK: - CategoryLinks
 struct CategoryLinks: Codable {
     let categoryLinks, photos: String
-
+    
     enum CodingKeys: String, CodingKey {
         case categoryLinks = "self"
         case photos
@@ -114,7 +102,7 @@ struct CategoryLinks: Codable {
 // MARK: - Links
 struct Links: Codable {
     let linksSelf, html, download: String
-
+    
     enum CodingKeys: String, CodingKey {
         case linksSelf = "self"
         case html, download

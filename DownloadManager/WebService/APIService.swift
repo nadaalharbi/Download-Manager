@@ -11,8 +11,9 @@ import UIKit
 
 class APIService {
     
-    static let urlString = "https://pastebin.com/raw/wgkJgazE"
+    private let urlString = "https://pastebin.com/raw/wgkJgazE"
     
+    // Todo remove
     class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void){
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -38,14 +39,13 @@ class APIService {
         task.resume()
     }
     
-    class func getUsersData(completion: @escaping (Users?, Error?) -> Void) {
+    func getUsersData(completion: @escaping (Users?, Error?) -> Void) {
         if let url = URL(string: urlString) {
             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                 if let data = data {
                     let jsonDecoder = JSONDecoder()
                     do {
                         let parsedJSON = try jsonDecoder.decode(Users.self, from: data)
-                        SharedModel.ElmUsers = parsedJSON
                         DispatchQueue.main.async {
                             completion(parsedJSON, nil)
                         }

@@ -14,7 +14,7 @@ class DetailedUserViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var usernameLbl: UILabel!
-    @IBOutlet weak var linkLbl: UILabel!
+    @IBOutlet weak var linkBtn: UIButton!
     @IBOutlet weak var profileCreatedAtLbl: UILabel!
     
     @IBOutlet weak var selectedUserImgView: UIImageView!
@@ -46,23 +46,28 @@ class DetailedUserViewController: UIViewController {
 
         viewAsLbl.font = UIFont(name: Constants.Fonts.MontserratRegularFont, size: 15.0)
         
+        let icon = UIImage(systemName: "link")!
+            linkBtn.setImage(icon, for: .normal)
+        linkBtn.imageView?.contentMode = .scaleAspectFit
+        linkBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 0)
+        linkBtn.addTarget(self, action: #selector(openLink), for: .touchUpInside)
+        
         self.imageSizeSegmentControl.selectedSegmentIndex = 0
         self.setSegmentFont(segment: self.imageSizeSegmentControl)
         
         /// Set Navigation Bar
         navigationController?.navigationBar.barTintColor = UIColor(named: Constants.Colors.primaryColor.rawValue)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font: UIFont(name: Constants.Fonts.MontserratRegularFont, size: 16.0)!]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font: UIFont(name: Constants.Fonts.MontserratBoldFont, size: 17.0)!]
         navigationItem.title = currentUserObj[selectedIndexPath].user.name
         
         /// Set Default displayed image --> Small
         selectedImageStringURL =  currentUserObj[selectedIndexPath].user.profileImage.small
         selectedUserImgView.image = currentUserObj[selectedIndexPath].user.profileImage.small.toImage()
         
-        profileImg.layer.borderColor = currentUserObj[selectedIndexPath].color.toUIColor
+        profileImg.layer.borderColor = currentUserObj[selectedIndexPath].color.toUIColor.cgColor
         profileImg.image = currentUserObj[selectedIndexPath].urls.thumb.toImage()
         usernameLbl.text = "@\(currentUserObj[selectedIndexPath].user.username)"
-        linkLbl.text = currentUserObj[selectedIndexPath].links.html
-        profileCreatedAtLbl.text = "Profile created at: \( currentUserObj[selectedIndexPath].createdAt.toDate()!)"
+        profileCreatedAtLbl.text = "Profile created at: \( currentUserObj[selectedIndexPath].createdAt.toDateFormat()!)"
 
         
         /// Set target Download Button
@@ -149,8 +154,8 @@ class DetailedUserViewController: UIViewController {
             //.copyToPasteboard
         ]
         
-        activity.popoverPresentationController?.sourceView = self.downloadBtn
-        activity.popoverPresentationController?.sourceRect = self.downloadBtn.bounds
+        activity.popoverPresentationController?.sourceView = self.view// self.downloadBtn
+        activity.popoverPresentationController?.sourceRect = self.view.bounds
         self.present(activity, animated: true, completion: nil)
     }
     
@@ -186,19 +191,36 @@ class DetailedUserViewController: UIViewController {
 //    }
     
     // MARK: - Selector Functions Objective-C
+    @objc func openLink(){
+        guard let url = URL(string: self.currentUserObj[self.selectedIndexPath].links.html) else { return }
+        UIApplication.shared.open(url)
+    }
+    
     @objc func downloadDropDownAction() {
         func handleAlertAction(_ action: UIAlertAction){
             print("Selected action is : \(String(describing: action.title))")
         }
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        // 1. Download photo to PhotoAlbum after asking for permission
         let download = UIAlertAction(title: "Save to Photo Album", style: .default, handler: handleDownloadImage)
-        let downloadImg = UIImage(systemName: "square.and.arrow.up")
-        download.setValue(downloadImg, forKey: "image")
+        let downloadIcon = UIImage(systemName: "square.and.arrow.up")
+        download.setValue(downloadIcon, forKey: "image")
         alertController.addAction(download)
     
-        alertController.addAction(UIAlertAction(title: "Copy URL", style: .default, handler: handleCopyURL))
-        alertController.addAction(UIAlertAction(title: "Share URL", style: .default, handler: handleShareURL))
+        // 2. Copy URL or image OR open it directly to Safari browser
+        let copyURL = UIAlertAction(title: "Copy URL", style: .default, handler: handleCopyURL)
+        let copyURLIcon = UIImage(systemName: "plus.square.on.square")
+        copyURL.setValue(copyURLIcon, forKey: "image")
+        alertController.addAction(copyURL)
+        
+        // 3. Share URL of the selected photo
+        let shareURL = UIAlertAction(title: "Share URL", style: .default, handler: handleShareURL)
+        let shareURLIcon = UIImage(systemName: "arrow.up.doc")
+        shareURL.setValue(shareURLIcon, forKey: "image")
+        alertController.addAction(shareURL)
+        
+        // Cancel/Dismiss the AlertControler
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: handleAlertAction))
         self.present(alertController, animated: true, completion: nil)
         //menu.show()

@@ -55,12 +55,17 @@ extension String {
     }
     
     
-    func toDate() -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en")
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        let date = dateFormatter.date(from: self)!
-        
-        return date
+    func toDateFormat() -> String? {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.locale = Locale(identifier: "en")
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+//        let date = dateFormatter.date(from: self)!
+    // Take the string and convert it to date base on givn orgin format
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    let date = dateFormatter.date(from: self)
+    // then, convert it to string with the format you need
+    dateFormatter.dateFormat = "dd-MM-yyy"
+    return dateFormatter.string(from: date!)
     }
 }// end of extension

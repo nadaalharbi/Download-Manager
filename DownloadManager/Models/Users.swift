@@ -1,5 +1,5 @@
 //
-//  UsersModel.swift
+//  Users.swift
 //  DownloadManager
 //
 //  Created by sy on 10/3/21.
@@ -8,12 +8,10 @@
 import Foundation
 
 
-// To parse the JSON, add this file to your project and do:
-//
-//   let elmUser = try? newJSONDecoder().decode(ElmUser.self, from: jsonData)
-
-
 typealias Users = [UserModel]
+//struct Users: Codable {
+//    let userData: [UserModel]
+//}
 //
 //struct ElmUsers: Codable {
 //    let UserComponent: [UserComponent]

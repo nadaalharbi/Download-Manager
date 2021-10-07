@@ -17,11 +17,17 @@ class UsersViewController: UIViewController {
     var filteredUsers = [UserModel]()
     var currentUserObj = [UserModel]()
     
+    // Todo test
+    // 3
+    var userModelObj = [UserModel]()
+    // 4
+    var usersViewModel: UsersViewModel!
+    var dataSource: UsersTableViewDataSource<UserTableViewCell, UserModel>!
+
     var selectedIndexPath: Int = 0
     var isSearchActive: Bool = false
     
     var refreshControl = UIRefreshControl()
-    
     private lazy var session: URLSession = {
         print("Current Memory Capacity: \( URLCache.shared.memoryCapacity)")
         // change URLCache default size 
@@ -37,13 +43,13 @@ class UsersViewController: UIViewController {
         super.viewDidLoad()
         /// Set Navigation Bar
         navigationController?.navigationBar.barTintColor = UIColor(named: Constants.Colors.primaryColor.rawValue)
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font: UIFont(name: Constants.Fonts.MontserratRegularFont, size: 16.0)!]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font: UIFont(name: Constants.Fonts.MontserratBoldFont, size: 17.0)!]
         self.title = "Download Manager"
         
         /// Set Back Button
         let backItem = UIBarButtonItem()
         backItem.title = "Back"
-        let font = UIFont(name: Constants.Fonts.MontserratRegularFont, size: 16.0)
+        let font = UIFont(name: Constants.Fonts.MontserratRegularFont, size: 17.0)
         backItem.setTitleTextAttributes([
                                             NSAttributedString.Key.font: font!, NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         self.navigationItem.backBarButtonItem = backItem
@@ -51,7 +57,6 @@ class UsersViewController: UIViewController {
         /// Set Table View
         usersTableView.delegate = self
         usersTableView.dataSource = self
-        
         usersTableView.backgroundColor = .clear
         
         /// Set Refresh Control
@@ -61,8 +66,24 @@ class UsersViewController: UIViewController {
         
         /// Set Search Bar
         self.setupSearchBar()
+        
+        
+        
+        // Todo test
+        self.usersViewModel = UsersViewModel()
+        self.usersViewModel.getUsersData() { data, error in
+            self.usersTableView.reloadData()
+        }
+        //self.usersViewModel.bindUsersViewModelToController =  {
+//            DispatchQueue.main.async {
+//                //self.usersTableView.dataSource = self.dataSource
+//                self.usersTableView.reloadData()
+//            }
+            //self.updateDataSource()
+        //}
     }
     
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
@@ -71,16 +92,30 @@ class UsersViewController: UIViewController {
         usersSearchBar?.text = ""
     }
     
+    
+    func updateDataSource(){
+        //self.dataSource = UsersTableViewDataSource(identifier: "UserTableViewCell", users: self.usersViewModel.usersData, configureUserCell: { (cell, data) in
+            //cell.usernameLbl.text = data.user.name
+            //cell.userImgView.image = data.user.profileImage.small.toImage()
+            //})
+
+            DispatchQueue.main.async {
+                self.usersTableView.dataSource = self.dataSource// as! UITableViewDataSource
+                self.usersTableView.reloadData()
+            }
+    }
+    
+    
     // MARK: - Selector Functions
     @objc func refreshUsers(_ sender: AnyObject) {
-        APIService.getUsersData(){ data, error in
-            if data != nil {
-                self.usersTableView.reloadData()
-                self.refreshControl.endRefreshing()
-            }else{
-                print(error?.localizedDescription ?? "error")
-            }
-        }
+//        APIService.getUsersData(){ data, error in
+//            if data != nil {
+//                self.usersTableView.reloadData()
+//                self.refreshControl.endRefreshing()
+//            }else{
+//                print(error?.localizedDescription ?? "error")
+//            }
+//        }
     }
     
     fileprivate func setupSearchBar() {
@@ -121,13 +156,12 @@ class UsersViewController: UIViewController {
 extension UsersViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if filteredUsers.count == 0 && isSearchActive {
             return 0
         } else {
             tableView.separatorStyle = .singleLine
             tableView.backgroundView = nil
-            return filteredUsers.count > 0 ? filteredUsers.count : SharedModel.ElmUsers.count
+            return filteredUsers.count > 0 ? filteredUsers.count : usersViewModel.usersData.count
         }
     }
     
@@ -139,17 +173,15 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource{
         
         cell.accessoryType = .disclosureIndicator
         
-        let users = isSearchActive ? filteredUsers : SharedModel.ElmUsers
+        let users = isSearchActive ? filteredUsers : usersViewModel.usersData
         guard indexPath.row < users.count  else { return cell }
         
-        // cell.usernameLbl?.text = SharedModel.ElmUsers[indexPath.row].user.name
-        //cell.userImgView.image = SharedModel.ElmUsers[indexPath.row].user.profileImage.medium.toImage()
         cell.configure(username: users[indexPath.row].user.name, url: URL(string: users[indexPath.row].user.profileImage.medium), session: session)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let users = isSearchActive ? filteredUsers : SharedModel.ElmUsers
+        let users = isSearchActive ? filteredUsers : usersViewModel.usersData
         guard indexPath.row < users.count  else { return }
         
         print("Selected cell is: \(users[indexPath.row])")
@@ -233,12 +265,12 @@ extension UsersViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        let indexes = SharedModel.ElmUsers.enumerated().filter({$0.element.user.name.range(of: searchBar.text!, options: .caseInsensitive) != nil}).map{$0.offset}
+        let indexes = usersViewModel.usersData.enumerated().filter({$0.element.user.name.range(of: searchBar.text!, options: .caseInsensitive) != nil}).map{$0.offset}
         
         filteredUsers.removeAll()
         for i in indexes {
-            if i < SharedModel.ElmUsers.count {
-                filteredUsers.append(SharedModel.ElmUsers[i])
+            if i < usersViewModel.usersData.count {
+                filteredUsers.append(usersViewModel.usersData[i])
             }
         }
         

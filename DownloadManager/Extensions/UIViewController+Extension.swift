@@ -46,7 +46,7 @@ extension UIViewController {
     }
     
     func setSegmentFont(segment: UISegmentedControl){
-        let font = UIFont(name: Constants.Fonts.MontserratRegularFont, size: 12.0)
+        let font = UIFont(name: Constants.Fonts.MontserratRegularFont, size: 14.0)
         segment.setTitleTextAttributes([NSAttributedString.Key.font: font!], for: .normal)
         
         segment.layer.cornerRadius = 70.0

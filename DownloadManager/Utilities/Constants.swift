@@ -34,6 +34,9 @@ class Constants {
         case DownloadSuccess
         case ConnectionError
         case NoInternetConnection
+        case ContinueWithNoInternet
+        case Logout
+        case CopyAndOpenURL
         
         var stringValue: String {
             switch self {
@@ -41,6 +44,10 @@ class Constants {
             case .DownloadSuccess: return "Photo has been downloaded to your Photo Album."
             case .ConnectionError: return "Connection Error"
             case .NoInternetConnection: return "Please check your internet connection"
+            case .ContinueWithNoInternet: return "No internet connection. Do you want to continue with cached data?"
+            case .Logout: return "Are you sure you want to logout?"
+            case .CopyAndOpenURL: return "URL has been copied successfuly! Do you want to open the link to Safari?"
+                
             }
         }
     }

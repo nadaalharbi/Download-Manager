@@ -20,27 +20,28 @@ class LaunchViewController: UIViewController {
         super.viewDidLoad()
         welcomeView.createShadowView(shadowOpacityValue: 0.3, shadowColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         
+        // Disable clicking of the button once clicked
+        startBtn.isEnabled = true
+        startBtn.isUserInteractionEnabled = true
+        
         startBtn.layer.cornerRadius = 15.0
         startBtn.layer.masksToBounds = true
         
         versionNumber.text = Bundle.main.versionString
     }
     
-    func fetchingUsers(){
-        if Reachability.isConnectedToNetwork() {
-            self.performSegue(withIdentifier: "navigateToUsersVC", sender: self)
-        } else {
-            self.displayAlertMessage(userTitle: Constants.AlertMessages.ConnectionError.stringValue, userMessage: Constants.AlertMessages.NoInternetConnection.stringValue)
-            return
-        }
-    }
-    
     @IBAction func startButtonAction(_ sender: UIButton) {
         // Disable clicking of the button once clicked
         sender.isEnabled = false
         sender.isUserInteractionEnabled = false
-        
-        // Call service
-        self.fetchingUsers()
+        if Reachability.isConnectedToNetwork() {
+            self.performSegue(withIdentifier: "navigateToUsersVC", sender: self)
+        }else{
+            self.displayAlertMessage(userTitle: Constants.AlertMessages.ConnectionError.stringValue, userMessage: Constants.AlertMessages.ContinueWithNoInternet.stringValue, displayCancelAction: true){ (alert, action) in
+                if action == .OK {
+                    self.performSegue(withIdentifier: "navigateToUsersVC", sender: self)
+                }
+            }
+        }
     }
 }

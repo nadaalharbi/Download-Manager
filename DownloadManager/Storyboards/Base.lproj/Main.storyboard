@@ -289,6 +289,9 @@
                                                         <rect key="frame" x="0.0" y="21" width="656" height="23"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                                         <state key="normal" title="Unsplash Profile Link"/>
+                                                        <connections>
+                                                            <action selector="openLinkAction:" destination="L7z-Zd-jtT" eventType="touchUpInside" id="PeM-Y7-2xJ"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile created at: 07/11/2021" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Pp-5O-9Vk">
                                                         <rect key="frame" x="0.0" y="48" width="656" height="20"/>

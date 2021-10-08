@@ -16,26 +16,13 @@ class UsersViewController: UIViewController {
     // MARK: - Variables
     var filteredUsers = [UserModel]()
     var currentUserObj = [UserModel]()
-    
-    // 3
     var userModelObj = [UserModel]()
-    // 4
+    
     var usersViewModel: UsersViewModel!
-    var dataSource: UsersTableViewDataSource<UserTableViewCell, UserModel>!
-
     var selectedIndexPath: Int = 0
     var isSearchActive: Bool = false
     
     var refreshControl = UIRefreshControl()
-    private lazy var session: URLSession = {
-        print("Current Memory Capacity: \( URLCache.shared.memoryCapacity)")
-        // change URLCache default size 
-        URLCache.shared.memoryCapacity = 512 * 1024 * 1024
-        let config = URLSessionConfiguration.default
-        config.requestCachePolicy = .returnCacheDataElseLoad
-        
-        return URLSession(configuration: config)
-    }()
     
     // MARK: - Functions
     override func viewDidLoad() {
@@ -60,21 +47,19 @@ class UsersViewController: UIViewController {
         
         /// Set Refresh Control
         refreshControl.attributedTitle = NSAttributedString(string: "Refresh Users...")
-        refreshControl.addTarget(self, action: #selector(self.refreshUsers(_:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(self.refreshUsers), for: .valueChanged)
         usersTableView.addSubview(refreshControl)
         
         /// Set Search Bar
         self.setupSearchBar()
         
-        
-        
-        // Todo test
+        /// Seu UserModel
         self.usersViewModel = UsersViewModel()
         self.usersViewModel.getUsersData() { data, error in
             self.usersTableView.reloadData()
         }
     }
-
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
@@ -84,10 +69,21 @@ class UsersViewController: UIViewController {
     }
     
     // MARK: - Selector Functions (Objcetive-C)
-    @objc func refreshUsers(_ sender: AnyObject) {
-        
-        self.usersViewModel.getUsersData() { data, error in
-            self.usersTableView.reloadData()
+    @objc func refreshUsers() {
+        if Reachability.isConnectedToNetwork() {
+            self.usersViewModel.getUsersData() { data, error in
+                if data != nil {
+                    self.usersTableView.reloadData()
+                    self.refreshControl.endRefreshing()
+                }
+            }
+        }else{
+            self.displayAlertMessage(userTitle: Constants.AlertMessages.ConnectionError.stringValue, userMessage: Constants.AlertMessages.NoInternetConnection.stringValue){ (alert, action) in
+                if action == .OK {
+                    self.refreshControl.endRefreshing()
+                    return
+                }
+            }
         }
     }
     
@@ -97,11 +93,10 @@ class UsersViewController: UIViewController {
         usersSearchBar.text = ""
         usersSearchBar.showsScopeBar = false
         usersSearchBar.showsCancelButton = true
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Cancel"
     }
     
     @IBAction func logoutAction(_ sender: Any) {
-        self.displayAlertMessage(userTitle: "Logout", userMessage: "Are you sure you want to logout?", displayCancelAction: true) { (alert, action) in
+        self.displayAlertMessage(userTitle: "Logout", userMessage: Constants.AlertMessages.Logout.stringValue, displayCancelAction: true) { (alert, action) in
             if action == .OK {
                 
                 let rootVC : UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LaunchViewController") as! LaunchViewController
@@ -138,7 +133,7 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource{
         let users = isSearchActive ? filteredUsers : usersViewModel.usersData
         guard indexPath.row < users.count  else { return cell }
         
-        cell.configure(username: users[indexPath.row].user.name, url: URL(string: users[indexPath.row].user.profileImage.medium), session: session)
+        cell.configure(username: users[indexPath.row].user.name, imageUrl: URL(string: users[indexPath.row].user.profileImage.medium))
         return cell
     }
     
@@ -158,7 +153,6 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource{
         detailedUserVC.currentUserObj = users
         
         navigationController?.pushViewController(detailedUserVC, animated: true)
-//        performSegue(withIdentifier: "detailedUserVC", sender: self)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -235,6 +229,8 @@ extension UsersViewController: UISearchBarDelegate {
                 filteredUsers.append(usersViewModel.usersData[i])
             }
         }
+        
+        print(filteredUsers)
         
         if(searchText == ""){
             isSearchActive = false

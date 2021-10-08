@@ -6,6 +6,7 @@
 //
 
 import UIKit
+// Async Library
 import PromiseKit
 
 class UserTableViewCell: UITableViewCell, ImageRepositoryProtocol {
@@ -22,36 +23,18 @@ class UserTableViewCell: UITableViewCell, ImageRepositoryProtocol {
     
     let cache = URLCache.shared
     private var dataTask: URLSessionDataTask?
-    // Todo remove
-    var user : UserModel? {
-        didSet {
-            usernameLbl.text = user?.user.name
-            userImgView.image = user?.user.profileImage.small.toImage()
-        }
-    }
     
     // MARK: - Functions
-    func configure(username: String, url: URL?, session: URLSession) {
+    func configure(username: String, imageUrl: URL?) {
         self.usernameLbl.text = username
-        
-        if let url = url {
-            // start animating
-            self.activityIndicatorView.startAnimating()
-            let dataTask = session.dataTask(with: url){ [weak self] (data, response, error) in
-                guard let _ = data else {
-                    return
-                }
-                
-                if let data = try? Data(contentsOf: url){
-                    let image = UIImage(data: data)?.resizeImage(with: CGSize(width: 200.0, height: 200.0))
-                    DispatchQueue.main.async {
-                        self?.activityIndicatorView.stopAnimating()
-                        self?.userImgView.image = image
-                    }
-                }
-            }
-            dataTask.resume()
-            self.dataTask = dataTask
+        if let url = imageUrl {
+            self.getImage(imageURL: url)
+                .done({ image in
+                    self.userImgView.image = image
+                    self.activityIndicatorView.stopAnimating()
+                }).catch( { error in
+                    print(error.localizedDescription)
+                })
         }
     }
     
@@ -76,30 +59,36 @@ class UserTableViewCell: UITableViewCell, ImageRepositoryProtocol {
     }
     
     
-    //////////////////
-    
+    // MARK: Image Repository
+    /* 1. getImage() function
+     It is used to determine whether or not we should get the image from the Webservice OR Cache.
+     */
     func getImage(imageURL: URL) -> Promise<UIImage> {
-        
-        // let imagePath = imageURL.path
         let request = URLRequest(url: imageURL)
         
         if (self.cache.cachedResponse(for: request) != nil) {
+            // if image is found in cache load it
             return self.loadImageFromCache(imageURL: imageURL)
         } else {
+            // if image is NOT found in download it from webservice
+            self.activityIndicatorView.startAnimating()
             return self.downloadImage(imageURL: imageURL)
         }
     }
     
+    /* 2. downloadImage() function
+     It's used to download image from Webservice.
+     then, It stors it to Cache
+     */
     func downloadImage(imageURL: URL) -> Promise<UIImage> {
         return Promise { seal in
             let request = URLRequest(url: imageURL)
-            
             DispatchQueue.global().async {
                 let dataTask = URLSession.shared.dataTask(with: imageURL) {data, response, _ in
                     if let data = data {
                         let cachedData = CachedURLResponse(response: response!, data: data)
                         self.cache.storeCachedResponse(cachedData, for: request)
-                        seal.fulfill(UIImage(data: data)!)
+                        seal.fulfill(UIImage(data: data)!)// promise fulfillment
                     }
                 }
                 dataTask.resume()
@@ -107,6 +96,9 @@ class UserTableViewCell: UITableViewCell, ImageRepositoryProtocol {
         }
     }
     
+    /* 3. loadImageFromCache() function
+     It's used to load image back from Cache instead of calling it from service again
+     */
     func loadImageFromCache(imageURL: URL) -> Promise<UIImage> {
         return Promise { seal in
             let request = URLRequest(url: imageURL)
@@ -120,6 +112,4 @@ class UserTableViewCell: UITableViewCell, ImageRepositoryProtocol {
             }
         }
     }
-    
 }
-

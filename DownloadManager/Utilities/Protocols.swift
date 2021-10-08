@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+// Async library
 import PromiseKit
 
 protocol ImageRepositoryProtocol: class {

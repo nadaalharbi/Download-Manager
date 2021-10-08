@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import DropDown
 
 class DetailedUserViewController: UIViewController {
     
@@ -31,12 +30,6 @@ class DetailedUserViewController: UIViewController {
     var currentUserObj = [UserModel]()
     var selectedImageStringURL: String = ""
     
-    /// Set up Drop Down Menu
-    let menu: DropDown = {
-        let dropDownMenu = DropDown()
-        dropDownMenu.dataSource = ["PNG", "URL", "JSON", "XML"]
-        return dropDownMenu
-    }()
     
     // MARK: - Functions
     override func viewDidLoad() {
@@ -46,12 +39,13 @@ class DetailedUserViewController: UIViewController {
 
         viewAsLbl.font = UIFont(name: Constants.Fonts.MontserratRegularFont, size: 15.0)
         
+        /// Setup open Unsplash link
         let icon = UIImage(systemName: "link")!
             linkBtn.setImage(icon, for: .normal)
         linkBtn.imageView?.contentMode = .scaleAspectFit
         linkBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 0)
-        linkBtn.addTarget(self, action: #selector(openLink), for: .touchUpInside)
         
+        /// Set the default index of the SegmentControl
         self.imageSizeSegmentControl.selectedSegmentIndex = 0
         self.setSegmentFont(segment: self.imageSizeSegmentControl)
         
@@ -71,47 +65,7 @@ class DetailedUserViewController: UIViewController {
 
         
         /// Set target Download Button
-        downloadBtn.addTarget(self, action: #selector(downloadDropDownAction), for: .touchUpInside)
-        
-        self.setDropDownMenu()
-    }
-    
-    fileprivate func setDropDownMenu() {
-        /// Drop Down menu UI Set up
-        menu.anchorView = downloadBtn
-        menu.dismissMode = .onTap
-        menu.selectRow(at: 0)
-        
-        menu.width = 100.0
-        
-        menu.cornerRadius = 15.0
-        menu.shadowColor = .black
-        menu.shadowRadius = 20.0
-        
-        menu.textFont = UIFont(name: Constants.Fonts.MontserratLightFont, size: 15.0)!
-        menu.textColor = .black
-        menu.selectedTextColor = .systemBlue
-        
-        
-        menu.selectionAction = { (index, item) in
-            print("selected indes is: \(index) with title: \(item)")
-            switch index {
-            case 0:
-                //self.handleDownloadImage()
-                break
-            case 1:
-                //handleCopyURL()
-                break
-            case 2:
-                // handleShareURL()
-                break
-            case 3:
-                // XML
-                print()
-            default:
-                print()
-            }
-        }
+        downloadBtn.addTarget(self, action: #selector(downloadAlertAction), for: .touchUpInside)
     }
     
     
@@ -130,10 +84,9 @@ class DetailedUserViewController: UIViewController {
         let pasteboard = UIPasteboard.general
         pasteboard.string = String(self.selectedImageStringURL)
         if pasteboard.string != "" || pasteboard.string != nil {
-            self.displayAlertMessage(userTitle: "Success", userMessage: "URL has been copied successfuly! Do you want to open the link to Safari?", displayCancelAction: true) { (alert, action) in
+            self.displayAlertMessage(userTitle: "Success", userMessage: Constants.AlertMessages.CopyAndOpenURL.stringValue, displayCancelAction: true) { (alert, action) in
                 if action == .OK {
-                    guard let url = URL(string: self.selectedImageStringURL) else { return }
-                    UIApplication.shared.open(url)
+                    self.openLink(link: self.selectedImageStringURL)
                 }
             }
         }
@@ -160,6 +113,12 @@ class DetailedUserViewController: UIViewController {
     }
     
     
+    @IBAction func openLinkAction(_ sender: UIButton) {
+        let linkString = currentUserObj[self.selectedIndexPath].links.html
+        self.openLink(link: linkString)
+    }
+    
+    
     @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -179,14 +138,14 @@ class DetailedUserViewController: UIViewController {
         }
     }
     
-    
-    // MARK: - Selector Functions Objective-C
-    @objc func openLink(){
-        guard let url = URL(string: self.currentUserObj[self.selectedIndexPath].links.html) else { return }
+    func openLink(link: String){
+        guard let url = URL(string: link) else { return }
         UIApplication.shared.open(url)
     }
     
-    @objc func downloadDropDownAction() {
+    
+    // MARK: - Selector Functions Objective-
+    @objc func downloadAlertAction() {
         func handleAlertAction(_ action: UIAlertAction){
             print("Selected action is : \(String(describing: action.title))")
         }
